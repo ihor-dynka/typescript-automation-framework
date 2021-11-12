@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "types": ["node", "mocha"],
+    "target": "es6",                                     
+    "outDir": "./build",    
+    "removeComments": true,
+    "sourceMap": false,           
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,                 
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,                                      
+    "skipLibCheck": true,
+    "moduleResolution": "node"
+  }
+}

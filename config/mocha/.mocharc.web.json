@@ -1,0 +1,11 @@
+ {  
+  "require": [
+    "ts-node/register",
+    "dotenv/config"
+  ],
+  "spec": [
+    "./test/web/**/*.ts"
+  ],
+  "timeout": 60000,
+  "slow": 30000
+}
