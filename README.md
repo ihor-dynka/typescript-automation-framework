@@ -1,9 +1,31 @@
 # TS Automation Framework
 
+## To run the tests ##
+
+    `npm install`
+
+API test:
+
+    `npm run apiTest`
+
+UI test:
+
+chromedriver:
+
+    `npm run webTest`
+
+selenoid:
+
+    `docker pull selenoid:$BROWSER_NAME:$BROWSER_VERSION` and update `/config/selenoid/browser.json` file
+    `npm run startSelenoid`
+    `npm run webTest`
+    `npm run stopSelenoid`
+
+
 ## Stack of tools and frameworks:
 1. Programming language - **Typescript**
 2. Build and package management - **NPM**
-3. CI tool - Jenkins
+3. CI tool - **Jenkins**
 4. Test framework - **Mocha**
 5. Assertion library - **Chai**
 6. Test Reporting - **Allure**, **Report Portal**
