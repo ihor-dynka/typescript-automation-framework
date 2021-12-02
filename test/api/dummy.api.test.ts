@@ -1,4 +1,4 @@
-import { CONFIG } from '../../config/env.conf';
+import { TEST_CONFIG } from '../../config/env.conf';
 import { HttpClient } from '../../core/http/HttpClient'
 import { IHttpClientRequestParameters } from '../../core/http/interfaces/IHttpClientRequestParameters'
 
@@ -7,7 +7,7 @@ describe ('Manager can', () => {
         const httpClient = new HttpClient();
 
         const getParameters: IHttpClientRequestParameters<void> = {
-            url: CONFIG.API_BASE_URL + '/v2/pet/1',
+            url: TEST_CONFIG.API_BASE_URL + '/v2/pet/1',
             requiresToken: false
         }
 

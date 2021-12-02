@@ -4,8 +4,8 @@
     "description": "",
     "scripts": {
         "apiTest": "mocha --config ./config/mocha/.mocharc.api.json",
-        "startSelenoid": "docker-compose --file config/selenoid/selenoid.yml up -d",
-        "stopSelenoid": "docker-compose --file config/selenoid/selenoid.yml down",
+        "startSelenoid": "docker-compose --file selenoid.yml up -d",
+        "stopSelenoid": "docker-compose --file selenoid.yml down",
         "webTest": "mocha --config ./config/mocha/.mocharc.web.json",
         "eslint": "eslint . --ext .ts"
     },

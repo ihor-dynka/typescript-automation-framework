@@ -2,7 +2,12 @@
 
 ## To run the tests ##
 
+Download all required dependencies
+
     `npm install`
+
+Specify environment variables. ENVIRONMENT is required (qa, uat)
+
 
 API test:
 

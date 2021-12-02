@@ -1,9 +1,11 @@
  {  
   "require": [
-    "ts-node/register", 
+    "ts-node/register",
     "dotenv/config"
   ],
-  "spec": ["./test/api/**/*.ts"],
+  "spec": [
+    "./test/api/**/*.ts"
+  ],
   "timeout": 30000,
   "slow": 10000
 }
