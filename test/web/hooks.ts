@@ -1,15 +1,15 @@
 import chromedriver from 'chromedriver'
-import { CONFIG } from '../../config/env.conf';
+import { TEST_CONFIG } from '../../config/env.conf';
 
 beforeEach(() => {
-    if (!CONFIG.REMOTE_BROWSER) {
+    if (!TEST_CONFIG.REMOTE_BROWSER_ENABLE) {
         chromedriver.start()
     }
-    
+
 })
 
 afterEach(() => {
-    if (!CONFIG.REMOTE_BROWSER){
+    if (!TEST_CONFIG.REMOTE_BROWSER_ENABLE) {
         chromedriver.stop();
     }
 })

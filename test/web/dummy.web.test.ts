@@ -17,6 +17,8 @@ describe('User can', () => {
         const title = await browser.findByCSS(".title");
         await title.waitUntilVisible(10000);
         await title.shouldHaveText('Swagger Petstore');
+
+        console.log(process.env.REMOTE_BROWSER_ENABLE);
     });
 });
 

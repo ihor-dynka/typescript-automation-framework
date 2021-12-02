@@ -1,0 +1,52 @@
+{
+  "chrome": {
+    "default": "95.0",
+    "versions": {
+      "95.0": {
+        "image": "selenoid/chrome:95.0",
+        "port": "4444",
+        "path": "/",
+        "tmpfs": {
+          "/tmp": "size=512m"
+        }
+      }
+    }
+  },
+  "firefox": {
+    "default": "94.0",
+    "versions": {
+      "94.0": {
+        "image": "selenoid/firefox:94.0",
+        "port": "4444",
+        "path": "/wd/hub",
+        "tmpfs": {
+          "/tmp": "size=512m"
+        }
+      }
+    }
+  },
+  "MicrosoftEdge": {
+    "default": "95.0",
+    "versions": {
+      "95.0": {
+        "image": "browsers/edge:95.0",
+        "port": "4444",
+        "tmpfs": {
+          "/tmp": "size=512m"
+        }
+      }
+    }
+  },
+  "safari": {
+    "default": "15.0",
+    "versions": {
+      "15.0": {
+        "image": "browsers/safari:15.0",
+        "port": "4444",
+        "tmpfs": {
+          "/tmp": "size=512m"
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import got, { Response } from "got";
-import { CONFIG } from "../../config/env.conf";
 import { IHttpClient } from "./interfaces/IHttpClient"
 import { IHttpClientRequestParameters } from "./interfaces/IHttpClientRequestParameters";
 
@@ -8,7 +7,7 @@ export class HttpClient implements IHttpClient {
     response!: Response<string>;
 
     async get<T>(parameters: IHttpClientRequestParameters<T>): Promise<void> {
-        const { url, requiresToken } = parameters 
+        const { url } = parameters 
 
         const options = {
             headers: {}
@@ -24,7 +23,7 @@ export class HttpClient implements IHttpClient {
     }
 
     async post<T>(parameters: IHttpClientRequestParameters<T>): Promise<void> {
-        const { url, payload, requiresToken } = parameters
+        const { url } = parameters
 
         const options = {
             headers: {}

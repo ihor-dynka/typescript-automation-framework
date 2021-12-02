@@ -1,5 +1,5 @@
 import { remote } from "webdriverio";
-import { browserConfig } from "../../config/selenoid/browser.conf";
+import { browserConfig } from "../../config/browser.conf";
 import { IWebDriver } from "./interfaces/IWebDriver";
 import { Browser } from "webdriverio";
 import { AsyncElement, WebdriverIoElement } from "./WebdriverIoElement";
