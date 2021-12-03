@@ -2,8 +2,8 @@ import { TEST_CONFIG } from '../../config/env.conf';
 import { HttpClient } from '../../core/http/HttpClient'
 import { IHttpClientRequestParameters } from '../../core/http/interfaces/IHttpClientRequestParameters'
 
-describe ('Manager can', () => {
-    it ('get a user details', async () => {
+describe('Manager can', () => {
+    it('get a user details', async () => {
         const httpClient = new HttpClient();
 
         const getParameters: IHttpClientRequestParameters<void> = {
@@ -11,8 +11,8 @@ describe ('Manager can', () => {
             requiresToken: false
         }
 
-        httpClient.get(getParameters)
-        httpClient.responseHaveStatusCode(200);
-        httpClient.responseBodyHasIdAndName();
+        await httpClient.get(getParameters)
+        await httpClient.responseHaveStatusCode(200);
+        await httpClient.responseBodyHasIdAndName();
     })
 })
