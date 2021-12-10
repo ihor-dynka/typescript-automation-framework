@@ -7,7 +7,7 @@
         "startSelenoid": "docker-compose --file selenoid.yml up -d",
         "stopSelenoid": "docker-compose --file selenoid.yml down",
         "webTest": "mocha --config ./config/mocha/.mocharc.web.json",
-        "eslint": "eslint . --ext .ts"
+        "eslint": "eslint . --ext .ts,.js"
     },
     "author": "",
     "license": "ISC",

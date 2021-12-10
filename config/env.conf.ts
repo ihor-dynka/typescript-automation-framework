@@ -1,7 +1,7 @@
 import { cleanEnv, str, url, port, bool, num } from "envalid";
 import path from 'dotenv'
 
-path.config({ path: '.env.' + process.env.ENVIRONMENT })
+path.config({ path: '.env.' + String(process.env.ENVIRONMENT) })
 
 cleanEnv(process.env, {
     ENVIRONMENT: str({

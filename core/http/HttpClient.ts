@@ -7,22 +7,16 @@ export class HttpClient implements IHttpClient {
     response!: Response<string>;
 
     async get<T>(parameters: IHttpClientRequestParameters<T>): Promise<void> {
-        const { url } = parameters 
+        const { url } = parameters
 
         const options = {
             headers: {}
         }
 
-        // if (requiresToken) {
-        //     const token = this.getToken()
-        //     options.headers.RequestVerificationToken = token
-        // }
-
         this.response = await got.get(url, options);
-        console.log(this.response.statusCode)
     }
 
-    async post<T>(parameters: IHttpClientRequestParameters<T>): Promise<void> {
+    async post<T>(parameters: IHttpClientRequestParameters<T>) {
         const { url } = parameters
 
         const options = {
@@ -30,18 +24,16 @@ export class HttpClient implements IHttpClient {
         }
 
         this.response = await got.post(url, options);
-        console.log(this.response.statusCode)
     }
 
-    async responseHaveStatusCode(status: number): Promise<void> {
+    async responseHaveStatusCode(status: number) {
         expect(this.response.statusCode).to.equals(status)
     }
 
     async responseBodyHasIdAndName() {
-        const body = JSON.parse(this.response.body);
+        const body: any = JSON.parse(this.response.body);
 
         expect(body.id).to.not.be.null;
         expect(body.name).to.not.be.null;
     }
-
 }

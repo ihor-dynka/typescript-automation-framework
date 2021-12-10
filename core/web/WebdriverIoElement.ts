@@ -8,12 +8,12 @@ export class WebdriverIoElement implements IWebElement {
 
     private element: AsyncElement;
 
-    constructor(selector: AsyncElement){
+    constructor(selector: AsyncElement) {
         this.element = selector;
     }
 
     async waitUntilVisible(duration: number): Promise<void> {
-        this.element.waitForDisplayed({ timeout: duration });
+        await this.element.waitForDisplayed({ timeout: duration });
     }
 
     async shouldHaveText(text: string): Promise<void> {
@@ -24,7 +24,7 @@ export class WebdriverIoElement implements IWebElement {
         return this.element.getText();
     }
     async click(): Promise<void> {
-        this.element.click();
+        await this.element.click();
     }
     async exists(): Promise<boolean> {
         return this.element.isExisting();
