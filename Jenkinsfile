@@ -30,7 +30,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage {
+        stage ('Static code analysis'){
             steps {
                 sh 'npm run eslint'
             }
