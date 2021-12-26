@@ -28,7 +28,11 @@ pipeline {
         stage ('Build') {
             steps {
                 sh 'npm install'
-                sh 'npm run webTest'
+            }
+        }
+        stage ('Run API Test') {
+            steps {
+                sh 'npm run apiTest'
             }
         }
     }
