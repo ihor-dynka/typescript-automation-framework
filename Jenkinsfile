@@ -25,9 +25,14 @@ pipeline {
                 git branch: 'Create_Jenkins_File_for_PR_debug_build', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
             }
         }
-        stage ('Build') {
+        stage ('Install all dependencies') {
             steps {
                 sh 'npm install'
+            }
+        }
+        stage {
+            steps {
+                sh 'npm run eslint'
             }
         }
         stage ('Run API Test') {
