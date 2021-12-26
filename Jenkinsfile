@@ -22,7 +22,7 @@ pipeline {
     stages {
         stage('Checkout Git repository') {
            steps {
-                git branch: 'master', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
+                git branch: 'Create_Jenkins_File_for_PR_debug_build', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
             }
         }
         stage ('Build') {
