@@ -6,6 +6,8 @@
   "spec": [
     "./test/api/**/*.ts"
   ],
+  "reporter": "mocha-junit-reporter",
+  "reporter-options": "./test-reports/junit/test-results.xml",
   "timeout": 30000,
   "slow": 10000
 }

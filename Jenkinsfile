@@ -5,6 +5,7 @@ pipeline {
     
     environment {
         ENVIRONMENT = 'qa'
+        API_BASE_URL='https://petstore.swagger.io'
         BROWSER = 'chrome'
         IMPLICIT_WAIT = '10000'
         REMOTE_BROWSER_ENABLE = 'false'
@@ -32,4 +33,10 @@ pipeline {
             }
         }
     }
+
+    post {
+      always {
+        junit '**/test-reports/junit/*.xml'
+      }
+   } 
 }

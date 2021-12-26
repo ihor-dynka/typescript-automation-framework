@@ -32,6 +32,7 @@
         "@wdio/junit-reporter": "^7.16.4",
         "@wdio/mocha-framework": "^7.16.1",
         "@wdio/spec-reporter": "^7.16.1",
-        "eslint": "^7.1.0"
+        "eslint": "^7.1.0",
+        "mocha-junit-reporter": "^2.0.2"
     }
 }
