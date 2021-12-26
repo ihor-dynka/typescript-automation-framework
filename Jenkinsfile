@@ -38,7 +38,8 @@ pipeline {
       always {
         junit (
             allowEmptyResults: true,
-            testResults: '**/test-results.xml'
+            testResults: '**/test-results.xml',
+            skipPublishingChecks: true
         )
       }
    } 
