@@ -2,6 +2,10 @@ pipeline {
     agent any
     
     tools {nodejs 'node'}
+
+    parameters {
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+    }
     
     environment {
         ENVIRONMENT = 'qa'
@@ -22,7 +26,7 @@ pipeline {
     stages {
         stage('Checkout Git repository') {
            steps {
-                git branch: 'Create_Jenkins_File_for_PR_debug_build', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
+                git branch: '${params.BRANCH}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
             }
         }
         stage ('Install all dependencies') {
