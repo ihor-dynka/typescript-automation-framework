@@ -11,6 +11,9 @@ export class WebdriverIoElement implements IWebElement {
     constructor(selector: AsyncElement) {
         this.element = selector;
     }
+    async setValue(text: string): Promise<void> {
+        await this.element.setValue(text);
+    }
 
     async waitUntilVisible(duration: number): Promise<void> {
         await this.element.waitForDisplayed({ timeout: duration });

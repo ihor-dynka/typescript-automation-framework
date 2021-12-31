@@ -5,4 +5,5 @@ export interface IWebDriver {
   tearDown(): Promise<void>;
   open(url: string): Promise<void>;
   findByCSS(selector: string): Promise<IWebElement>;
+  findAllByCSS(selector: string): Promise<Array<IWebElement>>;
 }

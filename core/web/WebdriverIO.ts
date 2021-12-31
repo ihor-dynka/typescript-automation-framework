@@ -26,6 +26,10 @@ export class WebdriverIo implements IWebDriver {
         const element = await this.browser.$(selector) as AsyncElement
         return new WebdriverIoElement(element);
     }
+
+    async findAllByCSS(selector: string): Promise<IWebElement[]> {
+        const element = await this.browser.$(selector) as AsyncElement
+        return new WebdriverIoElement(element) [];    }
 }
 
 
