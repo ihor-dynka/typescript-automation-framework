@@ -1,5 +1,12 @@
+updateGitlabCommitStatus state: 'pending'
+
 pipeline {
     agent any
+
+    options {
+        // Here add name of your saved gitlab configuration with API key
+        gitLabConnection('Configured gitlab')
+    }
     
     tools {nodejs 'node'}
 
