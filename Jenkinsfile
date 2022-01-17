@@ -41,10 +41,9 @@ pipeline {
 
     post {
       always {
-          stage ('Remove container and image') {
-              sh 'docker rm api_test_${BUILD_NUMBER}'
-              sh 'docker rmi api_test_${BUILD_NUMBER}'
-          }
+          
+        sh 'docker rm api_test_${BUILD_NUMBER}'
+        sh 'docker rmi api_test_${BUILD_NUMBER}'
           
         junit (
             allowEmptyResults: true,
