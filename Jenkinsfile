@@ -9,10 +9,6 @@ pipeline {
     }
     
     tools {nodejs 'node'}
-
-    parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
     
     environment {
         ENVIRONMENT = 'qa'
