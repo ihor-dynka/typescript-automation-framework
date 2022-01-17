@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="4.4840" tests="1" failures="0">
+  <testsuite name="Root Suite" timestamp="2021-12-26T16:51:09" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="User can" timestamp="2021-12-26T16:51:09" tests="1" file="C:\ts_automation\ts-automation-framework\test\web\dummy.web.test.ts" time="4.4830" failures="0">
+    <testcase name="User can open Pet Swagger" time="3.7580" classname="open Pet Swagger">
+    </testcase>
+  </testsuite>
+</testsuites>

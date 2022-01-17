@@ -3,11 +3,12 @@ import { IWebDriver } from "./interfaces/IWebDriver";
 import { Browser, remote } from "webdriverio";
 import { AsyncElement, WebdriverIoElement } from "./WebdriverIoElement";
 import { IWebElement } from "./interfaces/IWebElement";
+import { WebdriverIoElements } from "./WebdriverElements";
+import { IWebElements } from "./interfaces/IWebElements";
 
 export declare type AsyncBrowser = Browser<'async'>
 
 export class WebdriverIo implements IWebDriver {
-
     private browser!: AsyncBrowser;
 
     async setUp(): Promise<void> {
@@ -22,14 +23,19 @@ export class WebdriverIo implements IWebDriver {
         await this.browser.url(url)
     }
 
-    async findByCSS(selector: string): Promise<IWebElement> {
+    async maximizeWindow(): Promise<void> {
+        await this.browser.maximizeWindow();
+    }
+
+    async findElement(selector: string): Promise<IWebElement> {
         const element = await this.browser.$(selector) as AsyncElement
         return new WebdriverIoElement(element);
     }
 
-    async findAllByCSS(selector: string): Promise<IWebElement[]> {
-        const element = await this.browser.$(selector) as AsyncElement
-        return new WebdriverIoElement(element) [];    }
+    async findAllElements(selector: string): Promise<IWebElements> {
+        const elements = await this.browser.$(selector) as AsyncElement[]
+        return new WebdriverIoElements(elements);
+    }
 }
 
 

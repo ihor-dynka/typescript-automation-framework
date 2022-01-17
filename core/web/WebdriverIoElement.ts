@@ -11,6 +11,10 @@ export class WebdriverIoElement implements IWebElement {
     constructor(selector: AsyncElement) {
         this.element = selector;
     }
+    async moveTo(): Promise<void> {
+       await this.element.moveTo();
+    }
+
     async setValue(text: string): Promise<void> {
         await this.element.setValue(text);
     }
