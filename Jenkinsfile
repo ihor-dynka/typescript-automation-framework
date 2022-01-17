@@ -42,8 +42,10 @@ pipeline {
     post {
       always {
           
-        sh 'docker rm api_test_${BUILD_NUMBER}'
-        sh 'docker rmi api_test_${BUILD_NUMBER}'
+        script {
+            sh 'docker rm api_test_${BUILD_NUMBER}'
+            sh 'docker rmi api_test_${BUILD_NUMBER}'
+        }
           
         junit (
             allowEmptyResults: true,
