@@ -29,25 +29,37 @@ pipeline {
                 git branch: '${BRANCH}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
             }
         }
-        stage ('Install all dependencies') {
+        // stage ('Install all dependencies') {
+            // steps {
+                // sh 'npm install'
+            // }
+        // }
+        // stage ('Static code analysis') {
+            // steps {
+                // sh 'npm run eslint'
+            // }
+        // }
+
+        stage ('Build API Test Image') {
             steps {
-                sh 'npm install'
+                sh 'docker build . -t api_Test_${BUILD_NUMBER}'
             }
         }
-        stage ('Static code analysis') {
-            steps {
-                sh 'npm run eslint'
-            }
-        }
+
         stage ('Run API Test') {
             steps {
-                sh 'npm run apiTest'
+                sh 'docker run test --name api_Test_${BUILD_NUMBER}'
             }
         }
     }
 
     post {
       always {
+          stage ('Remove container and image') {
+              sh 'docker rm api_Test_${BUILD_NUMBER}'
+              sh 'docker rmi api_Test_${BUILD_NUMBER}'
+          }
+          
         junit (
             allowEmptyResults: true,
             testResults: '**/test-results.xml',
