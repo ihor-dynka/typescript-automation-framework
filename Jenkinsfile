@@ -1,11 +1,13 @@
+updateGitlabCommitStatus state: 'pending'
+
 pipeline {
     agent any
+
+    options {
+        gitLabConnection('gitlab')
+    }
     
     tools {nodejs 'node'}
-
-    parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
     
     environment {
         ENVIRONMENT = 'qa'
@@ -26,7 +28,7 @@ pipeline {
     stages {
         stage('Checkout Git repository') {
            steps {
-                git branch: '${BRANCH}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
+                git branch: '${gitlabSourceBranch}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'git_repo_credentials'
             }
         }
         // stage ('Install all dependencies') {
