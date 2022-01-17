@@ -8,6 +8,7 @@ pipeline {
     }
     
     tools {nodejs 'node'}
+    
     environment {
         ENVIRONMENT = 'qa'
         BROWSER = 'chrome'
