@@ -26,31 +26,15 @@ pipeline {
     }
     
     stages {
-        stage('Checkout Git repository') {
-           steps {
-                git branch: '${gitlabSourceBranch}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'git_repo_credentials'
-            }
-        }
-        // stage ('Install all dependencies') {
-            // steps {
-                // sh 'npm install'
-            // }
-        // }
-        // stage ('Static code analysis') {
-            // steps {
-                // sh 'npm run eslint'
-            // }
-        // }
-
         stage ('Build API Test Image') {
             steps {
-                sh 'docker build . -t api_Test_${BUILD_NUMBER}'
+                sh 'docker build . -t api_test_${BUILD_NUMBER}'
             }
         }
 
         stage ('Run API Test') {
             steps {
-                sh 'docker run test --name api_Test_${BUILD_NUMBER}'
+                sh 'docker run test --name api_test_${BUILD_NUMBER}'
             }
         }
     }
@@ -58,8 +42,8 @@ pipeline {
     post {
       always {
           stage ('Remove container and image') {
-              sh 'docker rm api_Test_${BUILD_NUMBER}'
-              sh 'docker rmi api_Test_${BUILD_NUMBER}'
+              sh 'docker rm api_test_${BUILD_NUMBER}'
+              sh 'docker rmi api_test_${BUILD_NUMBER}'
           }
           
         junit (
