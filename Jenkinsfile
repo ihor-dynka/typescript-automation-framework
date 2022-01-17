@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Checkout Git repository') {
            steps {
-                git branch: '${BRANCH}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'gitlab'
+                git branch: '${BRANCH}', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git', credentialsId: 'git_repo_credentials'
             }
         }
         stage ('Install all dependencies') {
