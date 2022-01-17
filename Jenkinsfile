@@ -4,8 +4,7 @@ pipeline {
     agent any
 
     options {
-        // Here add name of your saved gitlab configuration with API key
-        gitLabConnection('Configured gitlab')
+        gitLabConnection('gitlab')
     }
     
     tools {nodejs 'node'}
