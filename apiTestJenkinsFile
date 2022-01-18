@@ -2,10 +2,6 @@ pipeline {
     agent any
     
     tools {nodejs 'node'}
-
-    parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
-    }
     
     environment {
         ENVIRONMENT = 'qa'
@@ -24,12 +20,6 @@ pipeline {
     }
     
     stages {
-
-        stage('Example') {
-            steps {
-                git branch: "${params.BRANCH}", url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git'
-            }
-        }
 
         stage ('Build API Test Image') {
             steps {
