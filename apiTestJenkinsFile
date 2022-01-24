@@ -32,7 +32,7 @@ pipeline {
 
         stage ('Run API Test') {
             steps {
-                sh 'docker run test --name api_test_${BUILD_NUMBER}'
+                sh 'docker run api_test_${BUILD_NUMBER} --name api_test_${BUILD_NUMBER}'
             }
         }
     }
