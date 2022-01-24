@@ -24,13 +24,6 @@ pipeline {
     }
     
     stages {
-
-        stage('Git checkout') {
-            steps {
-                git branch: '${BRANCH}', credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git'
-            }
-        }
-
         stage ('Build API Test Image') {
             steps {
                 sh 'docker build . -t api_test_${BUILD_NUMBER}'
