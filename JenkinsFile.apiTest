@@ -11,13 +11,13 @@ pipeline {
     stages {
         stage ('Build API Test Image') {
             steps {
-                sh 'docker build . -t api_test_${BUILD_NUMBER}'
+                sh 'docker build . -t api_test:${BUILD_NUMBER}'
             }
         }
 
         stage ('Run API Test') {
             steps {
-                sh 'docker run api_test_${BUILD_NUMBER} --name api_test_${BUILD_NUMBER} -e ENVIRONMENT=${ENVIRONMENT}'
+                sh 'docker run --rm --name api_test_${BUILD_NUMBER} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/test-results:/ts-automation-framework/test-results.xml api_test:${BUILD_NUMBER}'
             }
         }
     }
@@ -26,7 +26,6 @@ pipeline {
       always {
           
         script {
-            sh 'docker rm api_test_${BUILD_NUMBER}'
             sh 'docker rmi api_test_${BUILD_NUMBER}'
         }
           
