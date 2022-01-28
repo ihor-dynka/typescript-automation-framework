@@ -1,11 +1,10 @@
+import { IWebDriver } from '../../core/web/interfaces/IWebDriver';
 import { WebdriverIo } from '../../core/web/WebdriverIO';
 
 describe('User can', async function () {
-    let browser: WebdriverIo;
+    let browser: IWebDriver = new WebdriverIo();
 
     beforeEach(async function () {
-     browser = new WebdriverIo();
-
         await browser.setUp();
 
         await browser.open('https://www.epam.com/');
@@ -14,13 +13,13 @@ describe('User can', async function () {
         await title.shouldHaveText('Engineering the Future');
     })
 
-    this.afterEach(async function () {
-        browser.tearDown();
+    afterEach(async function () {
+        await browser.tearDown();
     })
 
 
     it('User can search anything in EPAM website', async function () {
-        (await browser.findElement(".header-search__button")).click();
+        await (await browser.findElement(".header-search__button")).click();
         await (await browser.findElement("#new_form_search")).setValue("Test Automation Engineer");
         const findButton = await browser.findElement("button.header-search__submit");
         await findButton.shouldHaveText("FIND");
@@ -30,9 +29,19 @@ describe('User can', async function () {
         await results.shouldHaveText(" results for \"Test Automation Engineer\"".toUpperCase())
     });
 
-    it('User can use "Menu" in EPAM website', async function () {
-        await (await browser.findElement("button.hamburger-menu__button")).click();
+    const menuItems:string[] = [
+        'Services', 
+        'How We Do It',
+        'Our Work',
+        'Insights',
+        'About'
+    ];
 
-        await (await browser.findElement("//*[@class='hamburger-menu__link'][text()='Services']")).click();
+    menuItems.forEach((menuItem) => {
+        it('User can navigate to through the "Menu" in EPAM website', async function () {
+            await (await browser.findElement("button.hamburger-menu__button")).click();
+            await (await browser.findElement("//*[@class='hamburger-menu__link'][text()='" + menuItem + "']")).click();
+            await (await browser.findElement("h1.title-ui")).shouldHaveText(menuItem);
+        });
     });
 })

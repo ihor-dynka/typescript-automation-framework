@@ -12,7 +12,7 @@ export class WebdriverIo implements IWebDriver {
     private browser!: AsyncBrowser;
 
     async setUp(): Promise<void> {
-        this.browser = await remote(browserConfig) as AsyncBrowser;
+        this.browser = await remote(browserConfig);
     }
 
     async tearDown(): Promise<void> {
