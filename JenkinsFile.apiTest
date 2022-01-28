@@ -24,13 +24,12 @@ pipeline {
 
     post {
       always {
+          
         script {
             sh 'docker rmi api_test:${BUILD_NUMBER}'
         }
-      }
-      
-      always {
-          junit (
+          
+        junit (
             allowEmptyResults: true,
             testResults: '**/test-results.xml',
             skipPublishingChecks: true
