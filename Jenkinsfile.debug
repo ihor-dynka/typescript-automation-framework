@@ -1,0 +1,24 @@
+updateGitlabCommitStatus state: 'pending'
+
+pipeline {
+    agent any
+
+    options {
+        gitLabConnection('gitlab')
+    }
+    
+    tools {nodejs 'node'}
+    
+    stages {
+        stage ('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage ('Static code analysis') {
+            steps {
+                sh 'npm run eslint'
+            }
+        }
+    }
+}
