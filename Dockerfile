@@ -6,4 +6,6 @@ RUN npm install
 
 EXPOSE 8080
 
+ENV ENVIRONMENT=qa
+
 ENTRYPOINT [ "npm", "run", "apiTest" ]

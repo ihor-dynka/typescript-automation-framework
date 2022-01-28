@@ -4,6 +4,7 @@ import { IHttpClientRequestParameters } from '../../core/http/interfaces/IHttpCl
 
 describe('Manager can', () => {
     it('get a user details', async () => {
+        console.log('test started');
         const httpClient = new HttpClient();
 
         const getParameters: IHttpClientRequestParameters<void> = {
@@ -14,5 +15,6 @@ describe('Manager can', () => {
         await httpClient.get(getParameters)
         await httpClient.responseHaveStatusCode(200);
         await httpClient.responseBodyHasIdAndName();
+        console.log('test finished');
     })
 })
