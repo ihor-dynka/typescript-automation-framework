@@ -17,7 +17,7 @@ pipeline {
 
         stage ('Run API Test') {
             steps {
-                sh 'docker run --rm --name api_test_${BUILD_NUMBER} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/test-results:/ts-automation-framework/test-results.xml api_test:${BUILD_NUMBER}'
+                sh 'docker run --rm --name api_test_${BUILD_NUMBER} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/report/api:/ts-automation/report/api api_test:${BUILD_NUMBER}'
             }
         }
     }
@@ -31,7 +31,7 @@ pipeline {
           
         junit (
             allowEmptyResults: true,
-            testResults: '**/test-results.xml',
+            testResults: '**/api/junit.xml',
             skipPublishingChecks: true
         )
       }
