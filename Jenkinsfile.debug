@@ -19,7 +19,6 @@ pipeline {
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: 'origin/merge-requests/${gitlabMergeRequestIid}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', refspec: '+refs/merge-requests/*/head:refs/remotes/origin/merge-requests/*', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
             }
         }
-
         stage ('Install dependencies') {
             steps {
                 updateGitlabCommitStatus state: 'running'
