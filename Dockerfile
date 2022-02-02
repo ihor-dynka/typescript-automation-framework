@@ -5,4 +5,4 @@ WORKDIR /ts-automation
 COPY . /ts-automation
 RUN npm install
 
-ENTRYPOINT ["npm", "run", "apiTest"]
+CMD ["npm", "run", "apiTest"]

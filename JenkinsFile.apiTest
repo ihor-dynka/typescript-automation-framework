@@ -6,28 +6,23 @@ pipeline {
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
         choice choices: ['qa', 'uat'], name: 'ENVIRONMENT'
+        string (
+            defaultValue: 'latest'
+            name: 'VERSION',
+            trim : true
+        )
     }
     
     stages {
-        stage ('Build API Test Image') {
-            steps {
-                sh 'docker build . -t api_test:${BUILD_NUMBER}'
-            }
-        }
-
         stage ('Run API Test') {
             steps {
-                sh 'docker run --rm --name api_test_${BUILD_NUMBER} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/report/api:/ts-automation/report/api api_test:${BUILD_NUMBER}'
+                sh 'docker run --rm --name api_test_${BRANCH} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/report/api:/ts-automation/report/api api_test:${BRANCH}'
             }
         }
     }
 
     post {
       always {
-          
-        script {
-            sh 'docker rmi api_test:${BUILD_NUMBER}'
-        }
           
         junit (
             allowEmptyResults: true,
