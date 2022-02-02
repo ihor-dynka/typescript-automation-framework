@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
     agent any
     
@@ -16,7 +17,11 @@ pipeline {
         }
         stage ('Run API Test') {
             steps {
-                sh 'docker run --rm --name api_test_${BRANCH} -e ENVIRONMENT=${ENVIRONMENT} -v /${PWD}/report/api:/ts-automation/report/api api_test:${BRANCH}'
+                sh 'docker run --rm --name api_test_${BRANCH} \
+                 -e ENVIRONMENT=${ENVIRONMENT} \
+                 -v /${PWD}/report/api:/ts-automation/report/api \
+                 api_test:${BRANCH} \
+                 npm run apiTest'
             }
         }
     }
