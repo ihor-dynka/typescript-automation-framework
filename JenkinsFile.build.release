@@ -15,13 +15,7 @@ pipeline {
     stages {
         stage ('Checkout from Version Control') {
             steps {
-                updateGitlabCommitStatus name: 'jenkins', state: 'running'
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: 'origin/merge-requests/${gitlabMergeRequestIid}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', refspec: '+refs/merge-requests/*/head:refs/remotes/origin/merge-requests/*', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
-            }
-        }
-        stage ('Remove old images') {
-            steps {
-                sh 'docker rmi $(docker images api_test:$(BRANCH))'
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
             }
         }
         stage ('Build API Test Image') {
