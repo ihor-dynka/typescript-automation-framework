@@ -2,8 +2,11 @@
 pipeline {
     agent any
 
-    stages {
-        
+    triggers {
+        cron('H 23 * * *')
+    }
+
+    stages {  
         stage ('Remove old images') {
             steps {
                 sh 'docker image prune --all --force --filter "until=120h"'
