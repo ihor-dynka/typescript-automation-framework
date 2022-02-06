@@ -11,7 +11,6 @@ describe('User can', async function () {
 
     beforeEach(async function () {
         await browser.setUp();
-        await homePage.open('https://www.epam.com/');
     })
 
     afterEach(async function () {
@@ -19,8 +18,9 @@ describe('User can', async function () {
     })
 
 
-    xit('User can search anything in EPAM website', async function () {
+    it('User can search anything in EPAM website', async function () {
         const searchText = "Test Automation Engineer";
+        await homePage.open('https://www.epam.com/');
         await homePage.search(searchText);
         await homePage.searchResultShouldContains(searchText);
     });
@@ -33,16 +33,13 @@ describe('User can', async function () {
         MenuItem.ABOUT
     ];
 
-    menuItems.forEach((menuItem) => {
-        it('User can navigate to ' + menuItem + ' via the "Menu" in EPAM website', async function () {
-            await homePage.openMenu()
-                .then(menu => menu.selectItem(menuItem));
-                // .then(page => page.titleShouldBe(menuItem))
-                await menuItem
-        });
-    });
+    // menuItems.forEach((menuItem) => {
+    //     xit('User can navigate to ' + menuItem + ' via the "Menu" in EPAM website', async function () {
+    //         await homePage.openMenu()
+    //             .then(menu => menu.selectItem(menuItem));
+    //             // .then(page => page.titleShouldBe(menuItem))
+    //             await menuItem
+    //     });
+    // });
 })
-function then(arg0: (page: any) => any) {
-    throw new Error('Function not implemented.');
-}
 

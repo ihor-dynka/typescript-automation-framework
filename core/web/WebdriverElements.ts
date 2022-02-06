@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { IWebElements } from "./interfaces/IWebElements";
 import { AsyncElement } from "./WebdriverIoElement";
 
-export class WebdriverIoElements implements IWebElements{
+export class WebdriverIoElements implements IWebElements {
 
     private elements: Array<AsyncElement>;
 
@@ -10,9 +10,9 @@ export class WebdriverIoElements implements IWebElements{
         this.elements = selector;
     }
 
-   async eachShouldHaveText(text: string): Promise<void> {
+    async eachShouldHaveText(text: string): Promise<void> {
         this.elements.forEach(element => {
-            expect(element.getText).to.have.string(text);
+            expect(element.getText()).to.contains(text);
         });
     }
 }

@@ -1,4 +1,5 @@
 import { IWebDriver } from "../../../core/web/interfaces/IWebDriver";
+import { IWebElements } from "../../../core/web/interfaces/IWebElements";
 import { Menu } from "./Menu";
 
 export class HomePage {
@@ -29,11 +30,18 @@ export class HomePage {
         const results = await this.browser.findElement(".search-results__counter");
         await results.waitUntilVisible(10000);
         await results.shouldHaveText(text.toUpperCase())
-        await (await this.browser.findAllElements("search-results__item")).eachShouldHaveText(text);
+        const searchResult = await this.browser.findAllElements(".search-results__description");
+        this.shouldContainsAnyOdSearchWord(text, searchResult);
     }
 
     async openMenu(): Promise<Menu> {
         await (await this.browser.findElement("button.hamburger-menu__button")).click();
         return new Menu(this.browser);
+    }
+
+    private shouldContainsAnyOdSearchWord(text: string, searchResult: IWebElements) {
+        text.split(' ').forEach(item => {
+            searchResult.eachShouldHaveText(item);
+        });
     }
 }

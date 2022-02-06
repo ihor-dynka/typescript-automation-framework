@@ -28,12 +28,12 @@ export class WebdriverIo implements IWebDriver {
     }
 
     async findElement(selector: string): Promise<IWebElement> {
-        const element = await this.browser.$(selector) as AsyncElement
+        const element = await this.browser.$(selector)
         return new WebdriverIoElement(element);
     }
 
     async findAllElements(selector: string): Promise<IWebElements> {
-        const elements = await this.browser.$(selector) as AsyncElement[]
+        const elements = await this.browser.$$(selector)
         return new WebdriverIoElements(elements);
     }
 }
