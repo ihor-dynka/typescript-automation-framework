@@ -1,5 +1,5 @@
-import { IWebElement } from "./IWebElement";
-import { IWebElements } from "./IWebElements";
+import { IWebElement } from "./iwebelement";
+import { IWebElements } from "./iwebelements";
 
 export interface IWebDriver {
   setUp(): Promise<void>;

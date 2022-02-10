@@ -1,10 +1,10 @@
 import { browserConfig } from "../../config/browser.conf";
-import { IWebDriver } from "./interfaces/IWebDriver";
+import { IWebDriver } from "./interfaces/iwebdriver";
 import { Browser, remote } from "webdriverio";
-import { AsyncElement, WebdriverIoElement } from "./WebdriverIoElement";
-import { IWebElement } from "./interfaces/IWebElement";
-import { WebdriverIoElements } from "./WebdriverElements";
-import { IWebElements } from "./interfaces/IWebElements";
+import { AsyncElement, WebdriverIoElement } from "./webdriverio.element";
+import { IWebElement } from "./interfaces/iwebelement";
+import { WebdriverIoElements } from "./webdriver.elements";
+import { IWebElements } from "./interfaces/iwebelements";
 
 export declare type AsyncBrowser = Browser<'async'>
 

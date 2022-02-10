@@ -1,13 +1,11 @@
-import { IWebDriver } from '../../core/web/interfaces/IWebDriver';
+import { IWebDriver } from '../../core/web/interfaces/iwebdriver';
 import { WebdriverIo } from '../../core/web/WebdriverIO';
-import { MenuItem } from './enums/MenuItem';
-import { HomePage } from './pages/HomePage';
-import { Menu } from './pages/Menu';
+import { MenuItem } from './enums/menu.item';
+import { HomePage } from './pages/home.page';
 
 describe('User can', async function () {
     const browser: IWebDriver = new WebdriverIo();
     const homePage: HomePage = new HomePage(browser);
-    const menu: Menu = new Menu(browser);
 
     beforeEach(async function () {
         await browser.setUp();
@@ -17,12 +15,12 @@ describe('User can', async function () {
         await browser.tearDown();
     })
 
-
-    it('User can search anything in EPAM website', async function () {
+    xit('User can search anything in EPAM website', async function () {
         const searchText = "Test Automation Engineer";
-        await homePage.open('https://www.epam.com/');
-        await homePage.search(searchText);
-        await homePage.searchResultShouldContains(searchText);
+
+        await homePage.open()
+            .then(_ => _.search(searchText))
+            .then(_ => _.searchResultShouldContains(searchText))
     });
 
     const menuItems: MenuItem[] = [
@@ -33,13 +31,13 @@ describe('User can', async function () {
         MenuItem.ABOUT
     ];
 
-    // menuItems.forEach((menuItem) => {
-    //     xit('User can navigate to ' + menuItem + ' via the "Menu" in EPAM website', async function () {
-    //         await homePage.openMenu()
-    //             .then(menu => menu.selectItem(menuItem));
-    //             // .then(page => page.titleShouldBe(menuItem))
-    //             await menuItem
-    //     });
-    // });
+    menuItems.forEach((menuItem) => {
+        it(`User can navigate to ${menuItem} via the "Menu" in EPAM website`, async function () {
+            await homePage.open()
+                .then(_ => _.openMenu())
+                .then(menu => menu.selectItem(menuItem))
+                .then(page => page.titleShouldBe(menuItem))
+        });
+    });
 })
 

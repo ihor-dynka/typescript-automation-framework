@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { IWebElements } from "./interfaces/IWebElements";
-import { AsyncElement } from "./WebdriverIoElement";
+import { IWebElements } from "./interfaces/iwebelements";
+import { AsyncElement } from "./webdriverio.element";
 
 export class WebdriverIoElements implements IWebElements {
 
