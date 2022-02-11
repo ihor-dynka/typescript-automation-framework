@@ -1,11 +1,12 @@
 import { MenuItem } from './enums/menu.item';
 import { HomePage } from './pages/home.page';
 
-describe('User can', async function () {
+describe('User can', function () {
+
     const homePage: HomePage = new HomePage();
 
     it('User can search anything in EPAM website', async function () {
-        const searchText: string = "Test Automation Engineer";
+        const searchText = "Test Automation Engineer";
 
         await homePage.open()
             .then(_ => _.search(searchText))

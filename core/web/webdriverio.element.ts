@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Element } from "webdriverio";
-import { IWebElement } from "./interfaces/iwebelement";
+import { IWebElement } from "./interfaces/IWebElement";
 
 export declare type AsyncElement = Element<'async'>
 
@@ -11,6 +11,7 @@ export class WebdriverIoElement implements IWebElement {
     constructor(selector: AsyncElement) {
         this.element = selector;
     }
+
     async moveTo(): Promise<void> {
        await this.element.moveTo();
     }
@@ -32,19 +33,24 @@ export class WebdriverIoElement implements IWebElement {
     async getText(): Promise<string> {
         return this.element.getText();
     }
+
     async click(): Promise<IWebElement> {
         await this.element.click();
         return this;
     }
+
     async exists(): Promise<boolean> {
         return this.element.isExisting();
     }
+
     async isDisplayed(): Promise<boolean> {
         return this.element.isDisplayed();
     }
+
     async isEnabled(): Promise<boolean> {
         return this.element.isEnabled();
     }
+
     async getAttributeValue(attributeName: string): Promise<string> {
         return this.element.getAttribute(attributeName);
     }

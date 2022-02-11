@@ -1,11 +1,10 @@
 import chromedriver from 'chromedriver'
 import { TEST_CONFIG } from '../../config/env.conf';
-import { IWebDriver } from '../../core/web/interfaces/iwebdriver';
 import { WebdriverIo } from '../../core/web/WebdriverIO';
 
-export const browser: IWebDriver = new WebdriverIo();
+export const browser: WebdriverIo = new WebdriverIo();
 
-before(async function ()  {
+before(function () {
     if (!TEST_CONFIG.REMOTE_BROWSER_ENABLE) {
         chromedriver.start()
     }
@@ -19,7 +18,7 @@ afterEach(async function () {
     await browser.tearDown();
 })
 
-after(async function ()  {
+after(function () {
     if (!TEST_CONFIG.REMOTE_BROWSER_ENABLE) {
         chromedriver.stop();
     }

@@ -1,56 +1,57 @@
 import { TEST_CONFIG } from "../../../config/env.conf";
-import { IWebElements } from "../../../core/web/interfaces/iwebelements";
+import { IWebElements } from "../../../core/web/interfaces/IWebElements";
 import { browser } from "../test.helper";
 import { BasePage } from "./base.page";
 import { Menu } from "./menu";
 
 export class HomePage extends BasePage {
 
+    private menu: Menu = new Menu();
+
     async open(): Promise<HomePage> {
         await browser.open(TEST_CONFIG.WEB_BASE_URL)
-            .then(_ => browser.findElement('.title-slider__title'))
-            .then(title => title.waitUntilVisible(10000))
-            .then(title => title.shouldHaveText('Engineering the Future'));
+            .then(async _onPage => await _onPage.findElement('.title-slider__title'))
+            .then(async title => await title.waitUntilVisible(10000))
+            .then(async title => await title.shouldHaveText('Engineering the Future'));
 
         return this;
     }
 
     async search(text: string): Promise<HomePage> {
         await browser.findElement(".header-search__button")
-            .then(button => button.click());
+            .then(async button => await button.click());
 
         await browser.findElement("#new_form_search")
-            .then(form => form.setValue(text));
+            .then(async form => await form.setValue(text));
 
         await browser.findElement("button.header-search__submit")
-            .then(button => button.shouldHaveText("FIND"))
-            .then(button => button.click());
+            .then(async button => await button.shouldHaveText("FIND"))
+            .then(async button => await button.click());
 
         return this;
     }
 
     async searchResultShouldContains(text: string): Promise<HomePage> {
-        browser.findElement(".search-results__counter")
-            .then(element => element.waitUntilVisible(10000))
-            .then(element => element.shouldHaveText(text.toUpperCase()));
+        await browser.findElement(".search-results__counter")
+            .then(async element => await element.waitUntilVisible(10000))
+            .then(async element => await element.shouldHaveText(text.toUpperCase()));
 
         await browser.findAllElements(".search-results__description")
-            .then(result => this.shouldContainsAnyOdSearchWord(result, text));
+            .then(async result => await this.shouldContainsAnyOfSearchWords(result, text));
 
         return this;
     }
 
     async openMenu() {
         await browser.findElement("button.hamburger-menu__button")
-            .then(button => button.click());
+            .then(async button => await button.click());
 
-        return new Menu();
+        return this.menu;
     }
 
-    private shouldContainsAnyOdSearchWord(searchResult: IWebElements, text: string) {
-        text.split(' ')
-            .forEach(item => {
-                searchResult.eachShouldHaveText(item);
-            });
+    private async shouldContainsAnyOfSearchWords(searchResult: IWebElements, text: string): Promise<void> {
+        text.split(' ').forEach(async item => {
+            await searchResult.eachShouldHaveText(item);
+        });
     }
 }

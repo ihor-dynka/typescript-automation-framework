@@ -6,7 +6,7 @@ export class Menu extends BasePage {
 
     async selectItem(menuItem: MenuItem): Promise<Menu> {
         await browser.findElement(`//*[@class='hamburger-menu__link'][text()='${menuItem}']`)
-            .then(menu => menu.click());
+            .then(async menu => await menu.click());
 
         return this;
     }

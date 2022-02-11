@@ -1,14 +1,13 @@
 import { browserConfig } from "../../config/browser.conf";
-import { IWebDriver } from "./interfaces/iwebdriver";
 import { Browser, remote } from "webdriverio";
-import { AsyncElement, WebdriverIoElement } from "./webdriverio.element";
-import { IWebElement } from "./interfaces/iwebelement";
+import { WebdriverIoElement } from "./webdriverio.element";
 import { WebdriverIoElements } from "./webdriver.elements";
-import { IWebElements } from "./interfaces/iwebelements";
+import { IWebElement } from "./interfaces/IWebElement";
+import { IWebElements } from "./interfaces/IWebElements";
 
 export declare type AsyncBrowser = Browser<'async'>
 
-export class WebdriverIo implements IWebDriver {
+export class WebdriverIo implements WebdriverIo {
     private browser!: AsyncBrowser;
 
     async setUp(): Promise<void> {
@@ -19,8 +18,9 @@ export class WebdriverIo implements IWebDriver {
         await this.browser.deleteSession();
     }
 
-    async open(url: string): Promise<void> {
+    async open(url: string): Promise<WebdriverIo> {
         await this.browser.url(url)
+        return this;
     }
 
     async maximizeWindow(): Promise<void> {
@@ -28,13 +28,11 @@ export class WebdriverIo implements IWebDriver {
     }
 
     async findElement(selector: string): Promise<IWebElement> {
-        const element = await this.browser.$(selector)
-        return new WebdriverIoElement(element);
+        return new WebdriverIoElement(await this.browser.$(selector));
     }
 
     async findAllElements(selector: string): Promise<IWebElements> {
-        const elements = await this.browser.$$(selector)
-        return new WebdriverIoElements(elements);
+        return new WebdriverIoElements(await this.browser.$$(selector));
     }
 }
 
