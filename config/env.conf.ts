@@ -16,23 +16,24 @@ cleanEnv(process.env, {
 export const TEST_CONFIG = cleanEnv(process.env, {
     API_BASE_URL: url(),
     WEB_BASE_URL: url(),
-    REMOTE_BROWSER_ENABLE: bool(),
+    REMOTE_BROWSER_ENABLE: bool({ default: false }),
     BROWSER: str({
         choices: [
             'chrome',
             'firefox',
             'MicrosoftEdge',
             'safari'
-        ]
+        ],
+        default: 'chrome'
     }),
-    BROWSER_VERSION: str(),
-    REMOTE_BROWSER_HOST: str(),
-    REMOTE_BROWSER_BASE_PATH: str(),
-    REMOTE_BROWSER_PORT: port(),
-    LOCAL_CHROME_DRIVER_BASE_PATH: str(),
-    LOCAL_CHROME_DRIVER_PORT: port(),
-    IMPLICIT_WAIT: num(),
-    SELENOID_ENABLE_VIDEO: bool(),
-    SELENOID_ENABLE_LOGS: bool(),
-    SELENOID_ENABLE_VNC: bool()
+    BROWSER_VERSION: str({ default: '97.0' }),
+    REMOTE_BROWSER_HOST: str({ default: 'localhost' }),
+    REMOTE_BROWSER_BASE_PATH: str({ default: '/wd/hub' }),
+    REMOTE_BROWSER_PORT: port({ default: 4444 }),
+    LOCAL_CHROME_DRIVER_BASE_PATH: str({ default: '/' }),
+    LOCAL_CHROME_DRIVER_PORT: port({ default: 9515 }),
+    IMPLICIT_WAIT: num({ default: 10000 }),
+    SELENOID_ENABLE_VIDEO: bool({ default: false }),
+    SELENOID_ENABLE_LOGS: bool({ default: false }),
+    SELENOID_ENABLE_VNC: bool({ default: false })
 })
