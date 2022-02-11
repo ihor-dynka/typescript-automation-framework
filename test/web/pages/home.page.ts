@@ -1,5 +1,5 @@
 import { TEST_CONFIG } from "../../../config/env.conf";
-import { IWebElements } from "../../../core/web/interfaces/IWebElements";
+import { IWebElements } from "../../../core/web/interfaces/iwebelements";
 import { browser } from "../test.helper";
 import { BasePage } from "./base.page";
 import { Menu } from "./menu";

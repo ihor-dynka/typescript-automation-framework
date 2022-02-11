@@ -1,6 +1,6 @@
 import chromedriver from 'chromedriver'
 import { TEST_CONFIG } from '../../config/env.conf';
-import { WebdriverIo } from '../../core/web/WebdriverIO';
+import { WebdriverIo } from '../../core/web/webdriverio';
 
 export const browser: WebdriverIo = new WebdriverIo();
 

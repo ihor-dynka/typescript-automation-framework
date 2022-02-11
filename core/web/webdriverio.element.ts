@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Element } from "webdriverio";
-import { IWebElement } from "./interfaces/IWebElement";
+import { IWebElement } from "./interfaces/iwebelement";
 
 export declare type AsyncElement = Element<'async'>
 

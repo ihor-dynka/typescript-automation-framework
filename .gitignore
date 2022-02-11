@@ -3,3 +3,4 @@ node_modules
 selenoid/logs
 selenoid/video
 .vscode/launch.json
+report
