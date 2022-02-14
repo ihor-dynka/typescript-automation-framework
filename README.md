@@ -39,6 +39,11 @@ selenoid:
 9. API automated testing - **Got**
 
 
+##Jenkins
+### Plugins
+- NodeJS
+- git Parameter
+
 ## Architecture diagrams
 
 ### Flow diagram

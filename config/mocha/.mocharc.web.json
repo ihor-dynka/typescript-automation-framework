@@ -6,6 +6,7 @@
   "spec": [
     "./test/web/**/*.ts"
   ],
+  "reporter": "mocha-junit-reporter",
   "timeout": 60000,
   "slow": 30000
 }
