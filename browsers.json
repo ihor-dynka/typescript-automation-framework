@@ -1,9 +1,9 @@
 {
   "chrome": {
-    "default": "95.0",
+    "default": "97.0",
     "versions": {
-      "95.0": {
-        "image": "selenoid/chrome:95.0",
+      "97.0": {
+        "image": "selenoid/chrome:97.0",
         "port": "4444",
         "path": "/",
         "tmpfs": {
