@@ -1,4 +1,5 @@
 import { TEST_CONFIG } from "../../../config/env.conf";
+import { IWebElement } from "../../../core/web/interfaces/iwebelement";
 import { IWebElements } from "../../../core/web/interfaces/iwebelements";
 import { browser } from "../test.helper";
 import { BasePage } from "./base.page";
@@ -8,11 +9,13 @@ export class HomePage extends BasePage {
 
     private menu: Menu = new Menu();
 
+    async title(): Promise<IWebElement> {
+        return await browser.findElement('.title-slider__title');
+    }
+
     async open(): Promise<HomePage> {
-        await browser.open(TEST_CONFIG.WEB_BASE_URL)
-            .then(async _onPage => await _onPage.findElement('.title-slider__title'))
-            .then(async title => await title.waitUntilVisible(10000))
-            .then(async title => await title.shouldHaveText('Engineering the Future'));
+        await browser.open(TEST_CONFIG.WEB_BASE_URL);
+        await (await this.title()).shouldHaveText('Engineering the Future');
 
         return this;
     }
@@ -33,7 +36,6 @@ export class HomePage extends BasePage {
 
     async searchResultShouldContains(text: string): Promise<HomePage> {
         await browser.findElement(".search-results__counter")
-            .then(async element => await element.waitUntilVisible(10000))
             .then(async element => await element.shouldHaveText(text.toUpperCase()));
 
         await browser.findAllElements(".search-results__description")
