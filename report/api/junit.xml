@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="1.0080" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2022-02-02T11:39:45" tests="0" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="Manager can" timestamp="2022-02-02T11:39:45" tests="1" file="/ts-automation/test/api/dummy.api.test.ts" time="1.0060" failures="0">
-    <testcase name="Manager can get a user details" time="1.0020" classname="get a user details">
-    </testcase>
-  </testsuite>
-</testsuites>
