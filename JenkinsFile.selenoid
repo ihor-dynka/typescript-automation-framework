@@ -8,17 +8,9 @@ pipeline {
     }
     
     stages {
-        stage ('Checkout from Version Control') {
+         stage ('Checkout from Version Control') {
             steps {
-                checkout changelog: false, poll: false,
-                scm: [
-                        $class: 'GitSCM', branches: [[name: '${BRANCH}']
-                    ],
-                extensions: [], 
-                userRemoteConfigs: [
-                    [
-                        credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]
-                    ]
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
             }
         }
         stage ('Copy browser.json to remote host') {
