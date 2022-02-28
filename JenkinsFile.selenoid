@@ -23,30 +23,10 @@ pipeline {
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
             }
         }
-        stage ('Copy browser.json to remote host') {
+        stage ('Copy Selenoid configs to remote host') {
             steps {
-                sshPublisher(
-                    continueOnError: false, 
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "Selenoid",
-                            transfers: [sshTransfer(sourceFiles: 'browser.json')],
-                            verbose: true
-                        )
-                    ]
-                )
-                sshPublisher(
-                    continueOnError: false, 
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "Selenoid",
-                            transfers: [sshTransfer(sourceFiles: 'selenoid.yml')],
-                            verbose: true
-                        )
-                    ]
-                )
+                CopyFileOverSSH('browser.json')
+                CopyFileOverSSH('selenoid.yml')
             }
         }
         stage ('Start Selenoid') {
@@ -54,18 +34,8 @@ pipeline {
                environment name: 'StartSelenoid', value: 'true'
             }
             steps {
-                sshPublisher(
-                    continueOnError: false, 
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "Selenoid",
-                            transfers: [sshTransfer(execCommand: "cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
-                                                                  docker-compose --file selenoid.yml up -d")],
-                            verbose: true
-                        )
-                    ]
-                )
+                ExecuteCommandOverSSH("cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
+                                                                  docker-compose --file selenoid.yml up -d")
             }
         }
         stage ('Stop Selenoid') {
@@ -73,18 +43,36 @@ pipeline {
                 environment name: 'StopSelenoid', value: 'true'
             }
             steps {
-                sshPublisher(
-                    continueOnError: false, 
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "Selenoid",
-                            transfers: [sshTransfer(execCommand: "docker-compose --file selenoid.yml down")],
-                            verbose: true
-                        )
-                    ]
-                )
+                ExecuteCommandOverSSH("docker-compose --file selenoid.yml down")
             }
         }
     } 
+}
+
+def CopyFileOverSSH(fileName) {
+    sshPublisher(
+        continueOnError: false, 
+        failOnError: true,
+        publishers: [
+            sshPublisherDesc(
+                configName: "Selenoid",
+                transfers: [sshTransfer(sourceFiles: fileName)],
+                verbose: true
+            )
+        ]
+    )
+}
+
+def ExecuteCommandOverSSH(command) {
+    sshPublisher(
+        continueOnError: false, 
+        failOnError: true,
+        publishers: [
+            sshPublisherDesc(
+                configName: "Selenoid",
+                transfers: [sshTransfer(execCommand: command)],
+                verbose: true
+            )
+        ]
+    )
 }
