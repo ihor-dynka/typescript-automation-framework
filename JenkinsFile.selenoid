@@ -51,7 +51,7 @@ pipeline {
         }
         stage ('Start Selenoid') {
             when {
-               params.StartSelenoid == true
+               environment name: 'StartSelenoid', value: 'true'
             }
             steps {
                 sshPublisher(
@@ -70,7 +70,7 @@ pipeline {
         }
         stage ('Stop Selenoid') {
             when {
-               params.StopSelenoid == true
+                environment name: 'StopSelenoid', value: 'true'
             }
             steps {
                 sshPublisher(
