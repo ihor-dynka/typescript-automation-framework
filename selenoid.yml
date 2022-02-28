@@ -10,7 +10,7 @@ services:
       - "./selenoid/video/:/opt/selenoid/video"
       - "./selenoid/logs/:/opt/selenoid/logs"
     environment:
-      - OVERRIDE_VIDEO_OUTPUT_DIR=./video/
+      - OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/selenoid/video/
     command: ["-conf", "/etc/selenoid/config/browsers.json", 
               "-timeout", "60s",
               "-service-startup-timeout", "30s",
@@ -21,6 +21,15 @@ services:
     ports:
       - "4444:4444"
 
+  selenoid-ui:
+    image: "aerokube/selenoid-ui"
+    network_mode: bridge
+    links:
+      - selenoid
+    ports:
+      - "8080:8080"
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+  
   video-recorder:
     network_mode: bridge
     image: selenoid/video-recorder:latest-release

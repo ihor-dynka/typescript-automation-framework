@@ -1,0 +1,78 @@
+#!/usr/bin/env groovy
+pipeline {
+
+    agent any
+
+    parameters {
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+        booleanParam (
+            name: 'StartSelenoid',
+            defaultValue: true,
+            description: 'Set up Selenoid.'
+        )
+        booleanParam (
+            name: 'StopSelenoid',
+            defaultValue: false,
+            description: 'Tear down Selenoid.'
+        )
+    }
+    
+    stages {
+        stage ('Checkout from Version Control') {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '${BRANCH}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]]
+            }
+        }
+        stage ('Copy Selenoid configs to remote host') {
+            steps {
+                CopyFileOverSSH('browser.json')
+                CopyFileOverSSH('selenoid.yml')
+            }
+        }
+        stage ('Start Selenoid') {
+            when {
+               environment name: 'StartSelenoid', value: 'true'
+            }
+            steps {
+                ExecuteCommandOverSSH("cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
+                                                                  docker-compose --file selenoid.yml up -d")
+            }
+        }
+        stage ('Stop Selenoid') {
+            when {
+                environment name: 'StopSelenoid', value: 'true'
+            }
+            steps {
+                ExecuteCommandOverSSH("docker-compose --file selenoid.yml down")
+            }
+        }
+    } 
+}
+
+def CopyFileOverSSH(fileName) {
+    sshPublisher(
+        continueOnError: false, 
+        failOnError: true,
+        publishers: [
+            sshPublisherDesc(
+                configName: "Selenoid",
+                transfers: [sshTransfer(sourceFiles: fileName)],
+                verbose: true
+            )
+        ]
+    )
+}
+
+def ExecuteCommandOverSSH(command) {
+    sshPublisher(
+        continueOnError: false, 
+        failOnError: true,
+        publishers: [
+            sshPublisherDesc(
+                configName: "Selenoid",
+                transfers: [sshTransfer(execCommand: command)],
+                verbose: true
+            )
+        ]
+    )
+}
