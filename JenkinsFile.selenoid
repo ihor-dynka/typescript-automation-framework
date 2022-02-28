@@ -5,6 +5,16 @@ pipeline {
 
     parameters {
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+        booleanParam (
+            name: 'StartSelenoid',
+            defaultValue: true,
+            description: 'Set up Selenoid.'
+        )
+        booleanParam (
+            name: 'StopSelenoid',
+            defaultValue: false,
+            description: 'Tear down Selenoid.'
+        )
     }
     
     stages {
@@ -40,6 +50,9 @@ pipeline {
             }
         }
         stage ('Start Selenoid') {
+            when {
+               params.StartSelenoid == true
+            }
             steps {
                 sshPublisher(
                     continueOnError: false, 
@@ -49,6 +62,24 @@ pipeline {
                             configName: "Selenoid",
                             transfers: [sshTransfer(execCommand: "cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
                                                                   docker-compose --file selenoid.yml up -d")],
+                            verbose: true
+                        )
+                    ]
+                )
+            }
+        }
+        stage ('Start Selenoid') {
+            when {
+               params.StopSelenoid == true
+            }
+            steps {
+                sshPublisher(
+                    continueOnError: false, 
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "Selenoid",
+                            transfers: [sshTransfer(execCommand: "docker-compose --file selenoid.yml down")],
                             verbose: true
                         )
                     ]
