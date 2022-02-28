@@ -1,0 +1,43 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent any
+    
+    parameters {
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
+        choice choices: ['qa', 'uat'], name: 'ENVIRONMENT'
+    }
+    
+    stages {
+        stage ('Checkout from Version Control') {
+            steps {
+                checkout changelog: false, poll: false,
+                scm: [
+                        $class: 'GitSCM', branches: [[name: '${BRANCH}']
+                    ],
+                extensions: [], 
+                userRemoteConfigs: [
+                    [
+                        credentialsId: 'git_repo_credentials', url: 'https://git.epam.com/ihor_dynka/ts-automation-framework.git']]
+                    ]
+            }
+        }
+        stage ('Copy browser.json to remote host') {
+            steps {
+                sshPublisher(publishers: 
+                [
+                    sshPublisherDesc(configName: 'Selenoid', 
+                    transfers: [
+                        sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {}', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'browsers.json')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)
+                ])
+
+            }
+        }
+        // stage ('Pull Docker images from browser.json') {
+        //     steps {
+        //         sh 'yum -y install jq'
+        //         sh 'cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {}'
+        //     }
+        // }
+    }
+   } 
+}
