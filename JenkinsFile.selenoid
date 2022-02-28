@@ -47,7 +47,7 @@ pipeline {
                     publishers: [
                         sshPublisherDesc(
                             configName: "Selenoid",
-                            transfers: [sshTransfer(execCommand: "cat /path/to/browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
+                            transfers: [sshTransfer(execCommand: "cat browsers.json | jq -r '..|.image?|strings' | xargs -I{} docker pull {} && \
                                                                   docker-compose --file selenoid.yml up -d")],
                             verbose: true
                         )
