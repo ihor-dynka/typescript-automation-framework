@@ -4,3 +4,5 @@ selenoid/logs
 selenoid/video
 test-results.xml
 report
+allure-report
+allure-results

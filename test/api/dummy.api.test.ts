@@ -10,7 +10,7 @@ describe('Manager can', () => {
             url: TEST_CONFIG.API_BASE_URL + '/v2/pet/1',
             requiresToken: false
         }
-
+                
         await httpClient.get(getParameters)
         await httpClient.responseHaveStatusCode(200);
         await httpClient.responseBodyHasIdAndName();

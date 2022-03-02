@@ -26,6 +26,10 @@ selenoid:
     `npm run webTest`
     `npm run stopSelenoid`
 
+## To generate Allure report
+
+    `npm run allureReport`
+
 
 ## Stack of tools and frameworks:
 1. Programming language - **Typescript**
@@ -33,10 +37,11 @@ selenoid:
 3. CI tool - **Jenkins**
 4. Test framework - **Mocha**
 5. Assertion library - **Chai**
-6. Test Reporting - **Allure**, **Report Portal**
-7. Selenium server - **Selenoid**
-8. UI and Mobile automation - **Webdriver.io**
-9. API automated testing - **Got**
+6. Logger - **tslog**
+7. Test Reporting - **Allure**, **Report Portal**
+8. Selenium server - **Selenoid**
+9. UI and Mobile automation - **Webdriver.io**
+10. API automated testing - **Got**
 
 
 ##Jenkins

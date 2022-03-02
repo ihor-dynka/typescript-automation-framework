@@ -1,6 +1,6 @@
-interface ILogger {
-	message(msg : string, level : LogLevel): void;
-	setNext(nextLogger : ILogger): ILogger;
-	consoleLogger(levels : Set<LogLevel>): ILogger;
-	fileLogger(levels : Set<LogLevel>): ILogger;
+export interface ILogger {
+	info(message: string): void;
+	debug(message: string): void;
+	warn(message: string): void;
+	error(message: string): void;
 }
