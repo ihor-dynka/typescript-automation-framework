@@ -1,4 +1,4 @@
-import { WebdriverIo } from "../webdriverio"
+import { WebdriverIo } from "../WebdriverIO"
 import { IWebElement } from "./iwebelement"
 import { IWebElements } from "./iwebelements"
 

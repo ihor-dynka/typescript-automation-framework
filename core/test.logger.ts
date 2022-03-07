@@ -21,3 +21,5 @@ export class TestLogger implements ILogger {
         this.logger.error(message);
     }
 }
+
+// export default new TestLogger();

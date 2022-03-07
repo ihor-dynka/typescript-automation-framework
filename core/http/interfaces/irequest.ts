@@ -1,4 +1,4 @@
-export interface IHttpClientRequestParameters<T> {
+export interface IRequest<T> {
     url: string
     requiresToken: boolean
     payload?: T

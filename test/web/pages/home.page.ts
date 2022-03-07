@@ -15,7 +15,6 @@ export class HomePage extends BasePage {
 
     async open(): Promise<HomePage> {
         await browser.open(TEST_CONFIG.WEB_BASE_URL);
-        await (await this.title()).shouldHaveText('Engineering the Future');
 
         return this;
     }
