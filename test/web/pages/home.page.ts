@@ -1,4 +1,5 @@
 import { TEST_CONFIG } from "../../../config/env.conf";
+import { step } from "../../../core/decorators/step.decorators";
 import { IWebElement } from "../../../core/web/interfaces/iwebelement";
 import { IWebElements } from "../../../core/web/interfaces/iwebelements";
 import { browser } from "../test.helper";
@@ -13,12 +14,14 @@ export class HomePage extends BasePage {
         return await browser.findElement('.title-slider__title');
     }
 
+    @step()
     async open(): Promise<HomePage> {
         await browser.open(TEST_CONFIG.WEB_BASE_URL);
 
         return this;
     }
 
+    @step()
     async search(text: string): Promise<HomePage> {
         await browser.findElement(".header-search__button")
             .then(async button => await button.click());
@@ -33,6 +36,7 @@ export class HomePage extends BasePage {
         return this;
     }
 
+    @step()
     async searchResultShouldContains(text: string): Promise<HomePage> {
         await browser.findElement(".search-results__counter")
             .then(async element => await element.shouldHaveText(text.toUpperCase()));
@@ -43,6 +47,7 @@ export class HomePage extends BasePage {
         return this;
     }
 
+    @step()
     async openMenu() {
         await browser.findElement("button.hamburger-menu__button")
             .then(async button => await button.click());

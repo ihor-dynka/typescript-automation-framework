@@ -6,7 +6,14 @@
   "spec": [
     "./test/web/**/*.ts"
   ],
-  "reporter": "mocha-junit-reporter",
+  "reporter": [
+    "dot",
+    "allure-mocha"
+  ],
+  "reporterOptions": [
+    "resultsDir=./test-results/web/allure/allure-results"
+  ],
   "timeout": 60000,
-  "slow": 30000
+  "slow": 30000,
+  "ui": "bdd"
 }

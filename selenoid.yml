@@ -7,10 +7,10 @@ services:
     volumes:
       - ".:/etc/selenoid/config"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./selenoid/video/:/opt/selenoid/video"
-      - "./selenoid/logs/:/opt/selenoid/logs"
+      - "./test-results/selenoid/video/:/opt/selenoid/video"
+      - "./test-results/selenoid/logs/:/opt/selenoid/logs"
     environment:
-      - OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/selenoid/video/
+      - OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/test-results/selenoid/video/
     command: ["-conf", "/etc/selenoid/config/browsers.json", 
               "-timeout", "60s",
               "-service-startup-timeout", "30s",

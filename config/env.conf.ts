@@ -26,7 +26,8 @@ export const TEST_CONFIG = cleanEnv(process.env, {
         ],
         default: 'chrome'
     }),
-    BROWSER_VERSION: str({ default: '97.0' }),
+    HEADLESS: bool({ default: false }),
+    BROWSER_VERSION: str({ default: '98.0' }),
     REMOTE_BROWSER_HOST: str({ default: 'localhost' }),
     REMOTE_BROWSER_BASE_PATH: str({ default: '/wd/hub' }),
     REMOTE_BROWSER_PORT: port({ default: 4444 }),

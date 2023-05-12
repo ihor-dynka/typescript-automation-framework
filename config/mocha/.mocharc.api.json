@@ -6,6 +6,13 @@
   "spec": [
     "./test/api/**/*.ts"
   ],
+  "reporter": [
+    "spec",
+    "allure-mocha"
+  ],
+  "reporterOptions": [
+    "resultsDir=./test-results/web/allure/allure-results"
+  ],
   "timeout": 30000,
   "slow": 10000
 }

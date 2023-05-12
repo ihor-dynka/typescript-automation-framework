@@ -1,9 +1,9 @@
 {
   "chrome": {
-    "default": "97.0",
+    "default": "99.0",
     "versions": {
-      "97.0": {
-        "image": "selenoid/chrome:97.0",
+      "99.0": {
+        "image": "selenoid/vnc_chrome:99.0",
         "port": "4444",
         "path": "/",
         "tmpfs": {
@@ -13,10 +13,10 @@
     }
   },
   "firefox": {
-    "default": "94.0",
+    "default": "97.0",
     "versions": {
-      "94.0": {
-        "image": "selenoid/firefox:94.0",
+      "97.0": {
+        "image": "selenoid/vnc_firefox:97.0",
         "port": "4444",
         "path": "/wd/hub",
         "tmpfs": {
@@ -26,10 +26,10 @@
     }
   },
   "MicrosoftEdge": {
-    "default": "95.0",
+    "default": "99.0",
     "versions": {
-      "95.0": {
-        "image": "browsers/edge:95.0",
+      "99.0": {
+        "image": "browsers/edge:99.0",
         "port": "4444",
         "tmpfs": {
           "/tmp": "size=512m"

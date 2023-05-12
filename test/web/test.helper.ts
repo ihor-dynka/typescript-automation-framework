@@ -1,8 +1,9 @@
 import chromedriver from 'chromedriver'
 import { TEST_CONFIG } from '../../config/env.conf';
-import { WebdriverIo } from '../../core/web/webdriverio';
+import { IWebDriver } from '../../core/web/interfaces/iwebdriver';
+import { WebDriver } from '../../core/web/webdriver';
 
-export const browser: WebdriverIo = new WebdriverIo();
+export const browser: IWebDriver = new WebDriver();
 
 before(function () {
     if (!TEST_CONFIG.REMOTE_BROWSER_ENABLE) {
